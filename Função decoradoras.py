@@ -49,25 +49,48 @@
 # ----------------------------------------------------------------------
 
 # DECORADORES COM PARÂMETROS
-def fabrica_de_decoradores(a=None,b=None,c=None):
-    def fabrica_de_funcoes(func):
-        print('decoradora 1')
+# def fabrica_de_decoradores(a=None,b=None,c=None):
+#     def fabrica_de_funcoes(func):
+#         print('decoradora 1')
 
-        def aninhada(*args, **kwargs):
-            print('Aninhada')
+#         def aninhada(*args, **kwargs):
+#             print('Aninhada')
+#             res = func(*args,**kwargs)
+#             return res
+#         return aninhada
+#     return fabrica_de_funcoes
+
+
+# @fabrica_de_decoradores(1,2,3)
+# def soma(x,y):
+#     return x + y
+
+# multiplica = fabrica_de_decoradores()(lambda x, y: x * y)
+
+# dez_mais_cinco = soma(10,5)
+# dez_vezes_cinco = multiplica(10,5)
+# print(dez_mais_cinco)
+# print(dez_vezes_cinco)
+
+# ----------------------------------------------------------------------
+
+# ORDEM DOS DECORADORES
+
+def parametros_decorador(nome):
+    def decorador(func):
+        print('Decorador: ', nome)
+
+        def sua_nova_funcao(*args,**kwargs):
             res = func(*args,**kwargs)
-            return res
-        return aninhada
-    return fabrica_de_funcoes
+            final = f'{res} {nome}'
+            return final
+        return sua_nova_funcao
+    return decorador
 
-
-@fabrica_de_decoradores(1,2,3)
+@parametros_decorador(nome = 'primeiro')
 def soma(x,y):
-    return x + y
-
-multiplica = fabrica_de_decoradores()(lambda x, y: x * y)
+    return x+y
 
 dez_mais_cinco = soma(10,5)
-dez_vezes_cinco = multiplica(10,5)
 print(dez_mais_cinco)
-print(dez_vezes_cinco)
+
