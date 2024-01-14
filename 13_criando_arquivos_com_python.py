@@ -74,10 +74,14 @@ caminho_arquivo += '13_arquivo.txt'
 #    print(arquivo.read())
 
 # ---------------------------------------------------------------------------------------------------
-with open(caminho_arquivo, 'a+') as arquivo: 
+# encolding com with open
+# usado para queo windows salve o arquivo em UTF-8 (texto fica escrito sem nenhum caractere diferente)
+with open(caminho_arquivo, 'w', encoding = 'utf8') as arquivo: 
+    arquivo.write('Atenção\n')
     arquivo.write('Linha 1\n')
     arquivo.write('Linha 2\n')
-    arquivo.writelines( # usado pra escrever varias linhas (passando um iteravél)
+    arquivo.writelines( 
         ('Linha 3\n', 'Linha 4\n')
     )
+
   
